@@ -1,0 +1,17 @@
+= <project-name> 
+
+A Ruby DSL for OSC
+
+== Installation
+
+  gem install micro-osc
+
+== Documentation
+
+* {rdoc}[http://rubydoc.info/github/arirusso/micro-osc] 
+
+== License
+
+Licensed under Apache 2.0, See the file LICENSE
+
+Copyright © 2011 Ari Russo
