@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-module MicroMIDI
+module MicroOSC
 
   class State
     

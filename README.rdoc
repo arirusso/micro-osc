@@ -1,4 +1,4 @@
-= <project-name> 
+= MicroOSC
 
 A Ruby DSL for OSC
 

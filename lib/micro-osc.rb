@@ -20,4 +20,15 @@ module MicroOSC
   
   VERSION = "0.0.1"
   
+  module Instructions
+  end
+  
+end
+
+module OSC
+  
+  def using(opts = {}, &block)
+    MicroOSC.block(&block)
+  end
+  
 end
