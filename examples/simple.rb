@@ -7,8 +7,6 @@ OSC.using(:input => 8000, :output => { :host => "localhost", :port => 9000 }) do
   
   out("/greeting", "hello!")
   
-  receive("/greeting") do |val|
-    puts "received #{val}"
-  end
-  
+  receive("/greeting") { |val| puts "received #{val}" }
+
 end
