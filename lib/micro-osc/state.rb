@@ -11,29 +11,17 @@ module MicroOSC
     }
     
     attr_accessor :auto_output,
-                  :channel,
-                  :last_note,
-                  :octave,
-                  :sysex_node,
-                  :super_sticky, 
-                  :velocity
+                  :pattern,
+                  :super_sticky
     
     attr_reader :inputs,
                 :last_command,
-                :listeners,
                 :outputs,
-                :output_cache, 
-                :start_time,
-                :thru_listeners
+                :output_cache
         
     def initialize(ins, outs, options = {})
       @auto_output = true
-      @last_command = nil
-      @last_note = nil    
-      @listeners = []
-      @thru_listeners = []
-      @output_cache = []
-      @start_time = Time.now.to_f
+      @last_command = nil    
       @super_sticky = false
 
       @channel = options[:channel] || Default[:channel]
@@ -67,12 +55,7 @@ module MicroOSC
       end
       output
     end
-    
-    private
-    
-    def now
-      ((Time.now.to_f - @start_time) * 1000)
-    end
+   
 
   end
 

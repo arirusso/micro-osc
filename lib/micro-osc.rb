@@ -23,12 +23,16 @@ module MicroOSC
   module Instructions
   end
   
+  def self.using(opts = {}, &block)
+    MicroOSC::Context.new(opts[:input], opts[:output], &block)
+  end
+  
 end
 
 module OSC
   
-  def using(opts = {}, &block)
-    MicroOSC.block(&block)
+  def self.using(*a, &block)
+    MicroOSC.using(*a, &block)
   end
-  
+ 
 end

@@ -15,6 +15,7 @@ module MicroOSC
         @state.outputs.each { |o| o.puts(msg) } unless msg.nil?
         msg
       end
+      alias_method
       
       # toggle mode where messages are automatically outputted
       def auto_output(mode = nil)
