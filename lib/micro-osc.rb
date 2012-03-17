@@ -19,8 +19,12 @@ module MicroOSC
   
   VERSION = "0.0.1"
   
-  def self.using(options = {}, &block)
+  def self.message(options = {}, &block)
     MicroOSC::Context.new(options, &block)
+  end
+  
+  class << self
+    alias_method :using, :message
   end
   
 end
@@ -28,8 +32,12 @@ end
 # define this module again to avoid overwriting another OSC module
 module OSC
   
-  def self.using(*a, &block)
+  def self.message(*a, &block)
     MicroOSC.using(*a, &block)
+  end
+  
+  class << self
+    alias_method :using, :message
   end
  
 end

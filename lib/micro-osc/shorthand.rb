@@ -6,7 +6,7 @@ module MicroOSC
   alias l loop
  
   class << self
-    alias_method :m, :using
+    alias_method :m, :message
   end
   
   class Context
@@ -17,6 +17,6 @@ module MicroOSC
   
 end
 
-def M(*a, &block)
-  MIDI.message(*a, &block)  
+def O(*a, &block)
+  OSC.message(*a, &block)  
 end
