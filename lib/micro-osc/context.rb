@@ -12,19 +12,16 @@ module MicroOSC
     attr_reader :state
     
     def_delegator :state, :output_cache, :cache
+    
+    alias_method :join, :osc_join
+    alias_method :output, :osc_send
+    alias_method :receive, :osc_receive
             
-    def initialize(ins, outs, &block)
+    def initialize(options = {}, &block)
       
-      @state = State.new(ins, outs)
-      
-      @instructions = {
-        :input => Instructions::Input.new(@state),      
-        :message => Instructions::Message.new(@state),
-        :output => Instructions::Output.new(@state),
-        :sticky => Instructions::Sticky.new(@state)
-      }
-       
-      edit(&block) unless block.nil?
+      @state = State.new
+      osc_start(options)
+      edit(&block) if block_given?
     end
     
     # open a block for editing/live coding in this Context
@@ -32,32 +29,21 @@ module MicroOSC
       self.instance_eval(&block)
     end
     
+    def receive(pattern, options = {}, &block)
+      osc_receive(pattern, options) { |target_obj, val| yield(val) }
+    end
+    
+    # repeat the last command
     def repeat
       self.send(@state.last_command[:method], *@state.last_command[:args]) unless @state.last_command.nil?
     end
     
     def method_missing(m, *a, &b)
-      delegated = false
       outp = nil
       options = a.last.kind_of?(Hash) ? a.last : {}
       do_output = options[:output] || true
-      [@instructions[:message]].each do |dsl|
-        if dsl.respond_to?(m)
-          msg = dsl.send(m, *a, &b)
-          outp = @state.auto_output && do_output ? @instructions[:output].output(msg) : msg
-          delegated = true
-        end
-      end
-      unless delegated
-        [@instructions[:input], @instructions[:output], @instructions[:sticky]].each do |dsl| 
-          if dsl.respond_to?(m)
-            outp = dsl.send(m, *a, &b)
-            delegated = true
-          end
-        end
-      end
+      outp = super
       @state.record(m, a, b, outp)
-      delegated ? outp : super
     end
         
   end

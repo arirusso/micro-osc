@@ -14,12 +14,10 @@ module MicroOSC
                   :pattern,
                   :super_sticky
     
-    attr_reader :inputs,
-                :last_command,
-                :outputs,
+    attr_reader :last_command,
                 :output_cache
         
-    def initialize(ins, outs, options = {})
+    def initialize(options = {})
       @auto_output = true
       @last_command = nil    
       @super_sticky = false
@@ -28,8 +26,6 @@ module MicroOSC
       @velocity = options[:velocity] || Default[:velocity]
       @octave = options[:octave] || Default[:octave]  
       
-      @inputs = ins
-      @outputs = outs  
     end
     
     def record(m, a, b, outp)

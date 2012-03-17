@@ -7,7 +7,6 @@
 
 # libs
 require "forwardable"
-
 require "osc-access"
 
 # modules
@@ -20,15 +19,13 @@ module MicroOSC
   
   VERSION = "0.0.1"
   
-  module Instructions
-  end
-  
-  def self.using(opts = {}, &block)
-    MicroOSC::Context.new(opts[:input], opts[:output], &block)
+  def self.using(options = {}, &block)
+    MicroOSC::Context.new(options, &block)
   end
   
 end
 
+# define this module again to avoid overwriting another OSC module
 module OSC
   
   def self.using(*a, &block)
@@ -36,3 +33,5 @@ module OSC
   end
  
 end
+
+require "micro-osc/shorthand"
