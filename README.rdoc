@@ -29,7 +29,7 @@ For Zeroconf support, {dnssd}[http://github.com/tenderlove/dnssd] is required.
   
 == Usage
 
-The following are two simple MicroOSC programs; the first will receive messages and the second will send them.  Run them in two separate windows and they will talk to each other.
+The following are two MicroOSC programs; the first will receive OSC messages and the second will send one.  Run them in two separate windows and they will talk to each other.
 
 Here's the receiver...
 
