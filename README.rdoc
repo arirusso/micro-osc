@@ -71,4 +71,4 @@ These examples and more are available {here}[http://github.com/arirusso/micro-os
 
 Licensed under Apache 2.0, See the file LICENSE
 
-Copyright © 2011 Ari Russo
+Copyright © 2011-2012 Ari Russo
