@@ -13,14 +13,12 @@ module MicroOSC
     
     def_delegator :state, :output_cache, :cache
     
-    alias_method :join, :osc_join
     alias_method :output, :osc_send
     alias_method :receive, :osc_receive
-    alias_method :wait_for_input, :osc_join
             
     def initialize(options = {}, &block)
       @state = State.new
-      osc_start(options)
+      osc_start(options.merge({}))
       edit(&block) if block_given?
     end
     
@@ -31,6 +29,7 @@ module MicroOSC
     
     def receive(pattern, options = {}, &block)
       osc_receive(pattern, options) { |target_obj, val| yield(val) }
+      sleep(0.01)
     end
     
     # repeat the last command
@@ -50,6 +49,11 @@ module MicroOSC
       outp = super
       @state.record(m, a, b, outp)
     end
+    
+    def join(options = {})
+      osc_join(options)
+    end
+    alias_method :wait_for_input, :join
         
   end
 end
