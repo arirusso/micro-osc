@@ -29,11 +29,9 @@ For Zeroconf support, {dnssd}[http://github.com/tenderlove/dnssd] is required.
   
 == Usage
 
-The following are two simple MicroOSC programs.  The first will receive messages and the second will send them.  
+The following are two simple MicroOSC programs; the first will receive messages and the second will send them.  Run them in two separate windows and they will talk to each other.
 
-You can run them in two separate windows and they will talk to each other.
-
-First, open two windows where you can run Ruby code and in one, run this simple receiver program...
+Here's the receiver...
 
   require "osc"
 
@@ -47,7 +45,7 @@ First, open two windows where you can run Ruby code and in one, run this simple 
 
   end
   
-You should see confirmation that the program is running "Ready to receive OSC..." in that Ruby console.
+When you run this, You should see confirmation that the program is running "Ready to receive OSC..." in your Ruby console.
   
 Next, in another window run this the client program:
 
@@ -59,9 +57,9 @@ Next, in another window run this the client program:
 
   end
 
-After running that, flip back to the first receiver program and see "received hullo!", confirming that these two programs could reach each other.
+After running it, flip back to the first receiver program and see "received hullo!", confirming that these two programs could reach each other.
 
-It's important to note that a single MicroOSC block can both send and receive OSC ({see here...}[http://github.com/arirusso/micro-osc/blob/master/examples/duplex.rb]) but for the sake of simple demonstration, here are two seperate ones... 
+Note that a single MicroOSC block can act as a client and receiver, both sending and receiving OSC ({see here...}[http://github.com/arirusso/micro-osc/blob/master/examples/duplex.rb])
 
 These examples and more are available {here}[http://github.com/arirusso/micro-osc/tree/master/examples]
 
