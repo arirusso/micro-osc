@@ -2,11 +2,68 @@
 
 A Ruby DSL for OSC
 
+== Features
+
+* Works with MRI and JRuby
+* Network resources are invisible to the user even when shared or multiplexed
+* Includes shortcuts for common tasks associated with OSC such as translating numeric values from one range to another
+* Network discoverable using {Zeroconf}[http://en.wikipedia.org/wiki/Zero_configuration_networking]
+
+== Requirements
+
+Ruby (MRI) 1.9.2+ or JRuby (in 1.9 mode)
+
+{eventmachine}[http://github.com/eventmachine/eventmachine] (version 0.12.8 recommended for MRI)
+{osc-access}[http://github.com/arirusso/osc-access]
+{osc-ruby}[http://github.com/aberant/osc-ruby]  
+
+These should install automatically with the gem
+
+For Zeroconf support, {dnssd}[http://github.com/tenderlove/dnssd] is required.
+
 == Installation
 
   gem install micro-osc
+  
+== Usage
 
-== Documentation
+The following are two simple MicroOSC programs.  The first will receive messages and the second will send them.  
+
+You can run them in two separate windows and they will talk to each other.
+
+First, open two windows where you can run Ruby code and in one, run this simple receiver program...
+
+  require "osc"
+
+  OSC.using(:input_port => 8000) do
+  
+    receive("/greeting") { |val| p "received #{val}" }
+    
+    p "Ready to receive OSC messages on port(s) #{input_ports.join(', ')}..."
+    
+    wait_for_input
+
+  end
+  
+You should see confirmation that the program is running "Ready to receive OSC..." in that Ruby console.
+  
+Next, in another window run this the client program:
+
+  require "osc"
+
+  OSC.using(:output => { :host => "localhost", :port => 8000 }) do
+  
+    out "/greeting", "hullo!"
+
+  end
+
+After running that, flip back to the first receiver program and see "received hullo!", confirming that these two programs could reach each other.
+
+It's important to note that a single MicroOSC block can both send and receive OSC ({see here...}[http://github.com/arirusso/micro-osc/blob/master/examples/duplex.rb]) but for the sake of simple demonstration, here are two seperate ones... 
+
+These examples and more are available {here}[http://github.com/arirusso/micro-osc/tree/master/examples]
+
+== Other Documentation
 
 * {rdoc}[http://rubydoc.info/github/arirusso/micro-osc] 
 
