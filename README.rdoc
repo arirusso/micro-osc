@@ -14,10 +14,12 @@ A Ruby DSL for OSC
 Ruby (MRI) 1.9.2+ or JRuby (in 1.9 mode)
 
 {eventmachine}[http://github.com/eventmachine/eventmachine] (version 0.12.8 recommended for MRI)
+
 {osc-access}[http://github.com/arirusso/osc-access]
+
 {osc-ruby}[http://github.com/aberant/osc-ruby]  
 
-These should install automatically with the gem
+(These should install automatically with the gem)
 
 For Zeroconf support, {dnssd}[http://github.com/tenderlove/dnssd] is required.
 
