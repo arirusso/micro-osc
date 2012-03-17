@@ -16,9 +16,9 @@ module MicroOSC
     alias_method :join, :osc_join
     alias_method :output, :osc_send
     alias_method :receive, :osc_receive
+    alias_method :wait_for_input, :osc_join
             
     def initialize(options = {}, &block)
-      
       @state = State.new
       osc_start(options)
       edit(&block) if block_given?
@@ -36,6 +36,11 @@ module MicroOSC
     # repeat the last command
     def repeat
       self.send(@state.last_command[:method], *@state.last_command[:args]) unless @state.last_command.nil?
+    end
+    
+    # shortcut to an array of port numbers
+    def input_ports
+      @osc_receiver.servers.keys
     end
     
     def method_missing(m, *a, &b)
