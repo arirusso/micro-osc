@@ -47,19 +47,18 @@ Here's the receiver...
   
 When you run this, You should see confirmation that the program is running "Ready to receive OSC..." in your Ruby console.
   
-Next, in another window run this the client program:
+Next, in another window run this next client program.
 
   require "osc"
 
-  OSC.using(:output => { :host => "localhost", :port => 8000 }) do
-  
-    out "/greeting", "hullo!"
-
-  end
+  o = OSC.using(:output => { :host => "localhost", :port => 8000 })
+  o.out "/greeting", "hullo!"
 
 After running it, flip back to the first receiver program and see "received hullo!", confirming that these two programs could reach each other.
 
-Note that a single MicroOSC block can act as a client and receiver, both sending and receiving OSC ({see here...}[http://github.com/arirusso/micro-osc/blob/master/examples/duplex.rb])
+Notice that I didn't use a Ruby block in the second program.  There's no particular reason for that other than to demonstrate both styles
+
+A single MicroOSC block can act as a client and receiver, both sending and receiving OSC ({see here...}[http://github.com/arirusso/micro-osc/blob/master/examples/duplex.rb])
 
 These examples and more are available {here}[http://github.com/arirusso/micro-osc/tree/master/examples]
 
